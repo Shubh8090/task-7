@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function myfuc(){
+        var xmlHTTP= new XMLHttpRequest();
+        xmlHTTP.open('GET','https://restcountries.com/v3.1/all', true);
+        xmlHTTP.send();
+        xmlHTTP.onreadystatechange=function(){
+            xmlHTTP.responseText = "[{key: 'value'}, {key: 'value'}]"
+            const outputObj = JSON.parse(xmlHTTP.responseText);
+             //GET ALL COUNTRIES IN ASIA
+                const asia=outputObj.filter((element)=>{
+                    if(element.region==='Asia'){
+                        return element.name;
+                    }
+                })
+                console.log(asia);
+ 
+ 
+                //COUNTRIES LESS THAN 200000 POPULATION
+                 const population1=countryData.filter((element)=>{
+                    return element.population<200000;
+                })
+                console.log(population1);
+ 
+                //NAME, Capital, Flag
+                 countryData.forEach((element)=>{
+                    console.log(element.name,element.capital,element.flag);
+                })
+ 
+ 
+                //TOTAL POPULATION
+                const population=countryData.reduce((acc,element)=>{
+                    return acc+element.population;
+                },0)
+                console.log(population);
+ 
+                //COUNTRY WITH US DOLLAR
+                var cur=[];
+                for(i=0;i<data.length;i++){
+                    if(data[i].currencies[0].code==="USD"){
+                        console.log("name:",data[i].name,"==>",data[i].currencies[0].code)
+                    }
+                }
+        }
+    }
+
+    
+</script>
+<body>
+    
+</body>
+</html>
